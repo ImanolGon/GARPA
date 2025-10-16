@@ -18,6 +18,41 @@
     return;
   }
 
+  const removeLegacyPlaceholder = () => {
+    const legacySelectors = [
+      '.session-placeholder',
+      '.session-coming-soon',
+      '.session-legacy',
+    ];
+
+    for (const selector of legacySelectors) {
+      const legacySection = document.querySelector(selector);
+      if (legacySection) {
+        legacySection.remove();
+        return;
+      }
+    }
+
+    const legacyTrigger = Array.from(
+      document.querySelectorAll('a, button')
+    ).find((element) =>
+      element.textContent && element.textContent.trim().toLowerCase() === 'volver a configurar'
+    );
+
+    if (legacyTrigger) {
+      const legacySection = legacyTrigger.closest('section');
+      if (legacySection) {
+        legacySection.remove();
+        return;
+      }
+
+      const legacyMain = legacyTrigger.closest('main');
+      if (legacyMain && legacyMain.childElementCount <= 3) {
+        legacyMain.remove();
+      }
+    }
+  };
+
   const intensityMap = {
     baja: 'Baja',
     media: 'Media',
@@ -29,6 +64,8 @@
     media: 'Activación moderada',
     alta: 'Activación intensa',
   };
+
+  removeLegacyPlaceholder();
 
   const params = new URLSearchParams(window.location.search);
   const durationParam = parseInt(params.get('duration') || '', 10);
