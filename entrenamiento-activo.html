@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrenamiento en curso | GARPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-session">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-acronym">GARPA</span>
+      <span class="brand-tagline">Guante Asistente para la Rehabilitación de Personas con Artritis</span>
+    </div>
+    <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+  </header>
+
+  <main class="session-main">
+    <section class="session-layout">
+      <header class="session-header">
+        <h1 id="session-title">Entrenamiento en curso</h1>
+        <p class="session-subtitle">Controla la sesión en tiempo real, ajusta la intensidad y revisa la actividad muscular.</p>
+      </header>
+
+      <div class="session-status">
+        <div class="session-timer" role="status" aria-live="polite">
+          <span class="session-timer__label">Tiempo restante</span>
+          <time id="session-time" class="session-timer__value" datetime="PT00M00S">00:00</time>
+        </div>
+        <button type="button" class="btn btn-critical session-pause" id="pause-button">Parar</button>
+      </div>
+
+      <section class="session-intensity" aria-labelledby="intensity-heading">
+        <div class="session-intensity__header">
+          <h2 id="intensity-heading">Intensidad en curso</h2>
+          <span class="session-intensity__current" id="current-intensity">—</span>
+        </div>
+        <div class="session-intensity__controls" role="group" aria-label="Ajustar intensidad">
+          <button type="button" class="chip" data-intensity="baja">Baja</button>
+          <button type="button" class="chip" data-intensity="media">Media</button>
+          <button type="button" class="chip" data-intensity="alta">Alta</button>
+        </div>
+      </section>
+
+      <section class="session-emg" aria-labelledby="emg-heading">
+        <div class="session-emg__header">
+          <h2 id="emg-heading">Señal EMG en vivo</h2>
+          <span class="session-emg__legend" id="emg-legend">Simulación interactiva</span>
+        </div>
+        <canvas id="emg-canvas" width="720" height="220" role="img" aria-label="Representación de la actividad muscular registrada"></canvas>
+        <p class="session-emg__note">Mostramos una señal de referencia mientras integramos la lectura del sensor real.</p>
+      </section>
+    </section>
+  </main>
+
+  <div class="session-dialog" id="pause-dialog" aria-hidden="true">
+    <div class="session-dialog__backdrop" data-dialog-dismiss></div>
+    <div class="session-dialog__panel" role="dialog" aria-modal="true" aria-labelledby="pause-title">
+      <h2 id="pause-title">Entrenamiento en pausa</h2>
+      <p class="session-dialog__message" id="pause-message">Selecciona una opción para continuar.</p>
+      <div class="session-dialog__actions">
+        <button type="button" class="btn btn-ghost" id="resume-button">Reanudar</button>
+        <button type="button" class="btn btn-highlight" id="finish-button">Finalizar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div>
+      <span class="footer-label">Licencias:</span>
+      <span class="footer-value">J.I.M. SRL</span>
+    </div>
+    <p class="footer-note">Proyecto académico de Instrumentación Biomédica 2</p>
+  </footer>
+  <script src="session.js"></script>
+</body>
+</html>
