@@ -1,7 +1,42 @@
 const storageKey = 'garpaProfile';
 
 const qs = (selector, scope = document) => scope.querySelector(selector);
-const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
+
+const demoSessionHistory = [
+  {
+    id: 'GARPA-105',
+    date: '10/05/2024',
+    duration: 15,
+    intensity: 'Media',
+    painBefore: 6,
+    painAfter: 4,
+    emgAverage: '48 µV',
+    vibration: 'Activada en los últimos 5 min',
+    notes: 'Movilidad mejorada sin fatiga excesiva.',
+  },
+  {
+    id: 'GARPA-106',
+    date: '13/05/2024',
+    duration: 12,
+    intensity: 'Baja',
+    painBefore: 5,
+    painAfter: 3,
+    emgAverage: '42 µV',
+    vibration: 'Activada todo el ciclo',
+    notes: 'Sesión corta por leve cansancio previo.',
+  },
+  {
+    id: 'GARPA-107',
+    date: '15/05/2024',
+    duration: 18,
+    intensity: 'Media',
+    painBefore: 4,
+    painAfter: 2,
+    emgAverage: '55 µV',
+    vibration: 'Solo durante el calentamiento',
+    notes: 'Mayor control de apertura en la mano izquierda.',
+  },
+];
 
 const formatDateTime = () => {
   const now = new Date();
@@ -15,6 +50,51 @@ const setFeedback = (element, message, tone = 'info') => {
   element.hidden = !message;
 };
 
+const renderHistory = (container, sessions) => {
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (!Array.isArray(sessions) || sessions.length === 0) {
+    container.innerHTML = '<p class="history-empty">Todavía no registraste sesiones.</p>';
+    return;
+  }
+
+  sessions.forEach((session) => {
+    const card = document.createElement('article');
+    card.className = 'history-card';
+    card.innerHTML = `
+      <header class="history-card__header">
+        <div>
+          <p class="history-card__date">${session.date}</p>
+          <h3 class="history-card__title">Sesión ${session.id}</h3>
+        </div>
+        <span class="history-card__intensity">${session.intensity}</span>
+      </header>
+      <dl class="history-card__metrics">
+        <div>
+          <dt>Duración</dt>
+          <dd>${session.duration} min</dd>
+        </div>
+        <div>
+          <dt>Dolor antes</dt>
+          <dd>${session.painBefore}/10</dd>
+        </div>
+        <div>
+          <dt>Dolor después</dt>
+          <dd>${session.painAfter}/10</dd>
+        </div>
+        <div>
+          <dt>EMG promedio</dt>
+          <dd>${session.emgAverage}</dd>
+        </div>
+      </dl>
+      <p class="history-card__vibration">${session.vibration}</p>
+      <p class="history-card__notes">${session.notes}</p>
+    `;
+    container.appendChild(card);
+  });
+};
+
 const collectFormData = (form, deviceStatus, batteryEl, syncEl) => {
   const getValue = (name) => {
     const field = form.elements.namedItem(name);
@@ -25,17 +105,6 @@ const collectFormData = (form, deviceStatus, batteryEl, syncEl) => {
     return field.value;
   };
 
-  const getChecked = (name) => {
-    const field = form.elements.namedItem(name);
-    if (!field) return false;
-    if (field instanceof RadioNodeList) {
-      return field.value === 'on';
-    }
-    return field.checked;
-  };
-
-  const preferredDays = qsa('input[name="preferredDays"]:checked', form).map((input) => input.value);
-
   return {
     fullName: getValue('fullName'),
     age: getValue('age'),
@@ -45,17 +114,10 @@ const collectFormData = (form, deviceStatus, batteryEl, syncEl) => {
     diagnosis: getValue('diagnosis'),
     affectedHand: getValue('affectedHand'),
     painLevel: getValue('painLevel'),
-    morningStiffness: getValue('morningStiffness'),
     functionalLimitation: getValue('functionalLimitation'),
     targetDuration: getValue('targetDuration'),
     defaultIntensity: getValue('defaultIntensity'),
-    preferredTime: getValue('preferredTime'),
-    preferredDays,
     emgThreshold: getValue('emgThreshold'),
-    consentData: getChecked('consentData'),
-    terms: getChecked('terms'),
-    notifyPush: getChecked('notifyPush'),
-    notifyEmail: getChecked('notifyEmail'),
     device: {
       isConnected: deviceStatus?.dataset.connected === 'true',
       label: deviceStatus?.textContent || 'Guante sin emparejar',
@@ -90,20 +152,10 @@ const populateForm = (form, data, refs) => {
   assignValue('diagnosis', data.diagnosis);
   assignValue('affectedHand', data.affectedHand);
   assignValue('painLevel', data.painLevel);
-  assignValue('morningStiffness', data.morningStiffness);
   assignValue('functionalLimitation', data.functionalLimitation);
   assignValue('targetDuration', data.targetDuration);
   assignValue('defaultIntensity', data.defaultIntensity);
-  assignValue('preferredTime', data.preferredTime);
   assignValue('emgThreshold', data.emgThreshold);
-  assignValue('consentData', data.consentData);
-  assignValue('terms', data.terms);
-  assignValue('notifyPush', data.notifyPush);
-  assignValue('notifyEmail', data.notifyEmail);
-
-  qsa('input[name="preferredDays"]', form).forEach((input) => {
-    input.checked = Array.isArray(data.preferredDays) ? data.preferredDays.includes(input.value) : false;
-  });
 
   if (refs.painOutput) {
     refs.painOutput.textContent = data.painLevel || form.elements.namedItem('painLevel')?.value || '0';
@@ -138,17 +190,10 @@ const exportCsv = (data) => {
     ['Diagnóstico', data.diagnosis || ''],
     ['Mano afectada', data.affectedHand || ''],
     ['Nivel de dolor', data.painLevel || ''],
-    ['Rigidez matutina', data.morningStiffness || ''],
     ['Limitación funcional', data.functionalLimitation || ''],
     ['Duración objetivo', data.targetDuration || ''],
     ['Intensidad predeterminada', data.defaultIntensity || ''],
-    ['Horario preferido', data.preferredTime || ''],
-    ['Días preferidos', (data.preferredDays || []).join(' | ')],
     ['Umbral EMG', data.emgThreshold || ''],
-    ['Notificaciones push', data.notifyPush ? 'Sí' : 'No'],
-    ['Notificaciones email', data.notifyEmail ? 'Sí' : 'No'],
-    ['Consentimiento datos', data.consentData ? 'Aceptado' : 'No aceptado'],
-    ['Términos', data.terms ? 'Aceptados' : 'No aceptados'],
     ['Guante conectado', data.device?.isConnected ? 'Sí' : 'No'],
     ['Estado del guante', data.device?.label || ''],
     ['Batería', data.device?.battery || ''],
@@ -184,12 +229,15 @@ const initProfile = () => {
   const deviceStatus = qs('[data-device-connection]', form);
   const batteryEl = qs('[data-battery-level]', form);
   const syncEl = qs('[data-last-sync]', form);
+  const historyContainer = qs('[data-history-list]', form);
 
   const refs = { painOutput, deviceStatus, batteryEl, syncEl, pairButton };
 
   if (deviceStatus && !deviceStatus.dataset.connected) {
     deviceStatus.dataset.connected = 'false';
   }
+
+  renderHistory(historyContainer, demoSessionHistory);
 
   /* Load draft if available */
   try {
@@ -207,8 +255,9 @@ const initProfile = () => {
     const updatePainOutput = () => {
       painOutput.textContent = painRange.value;
     };
-    painRange.addEventListener('input', updatePainOutput);
     updatePainOutput();
+    painRange.addEventListener('input', updatePainOutput);
+    painRange.addEventListener('change', updatePainOutput);
   }
 
   const setDeviceConnected = (connected) => {

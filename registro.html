@@ -93,21 +93,15 @@
           <span class="field-label">Nivel de dolor actual: <span data-output="painLevel">5</span>/10</span>
           <input class="field-input field-input--range" type="range" name="painLevel" min="0" max="10" value="5" />
         </label>
-        <div class="field-grid">
-          <label class="field">
-            <span class="field-label">Rigidez matutina (min)</span>
-            <input class="field-input" type="number" name="morningStiffness" min="0" max="240" step="5" required />
-          </label>
-          <label class="field">
-            <span class="field-label">Limitación funcional</span>
-            <select class="field-input" name="functionalLimitation" required>
-              <option value="" disabled selected>Seleccioná una opción</option>
-              <option value="leve">Leve</option>
-              <option value="moderada">Media</option>
-              <option value="severa">Alta</option>
-            </select>
-          </label>
-        </div>
+        <label class="field">
+          <span class="field-label">Limitación funcional</span>
+          <select class="field-input" name="functionalLimitation" required>
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="leve">Leve</option>
+            <option value="moderada">Media</option>
+            <option value="severa">Alta</option>
+          </select>
+        </label>
       </fieldset>
 
       <fieldset class="profile-fieldset">
@@ -125,21 +119,6 @@
               <label class="option"><input type="radio" name="defaultIntensity" value="alta" /><span>Alta</span></label>
             </div>
           </fieldset>
-        </div>
-        <div class="field-grid">
-          <label class="field">
-            <span class="field-label">Horario preferido</span>
-            <input class="field-input" type="time" name="preferredTime" />
-          </label>
-          <div class="field">
-            <span class="field-label">Días preferidos</span>
-            <div class="chip-group" role="group" aria-label="Días preferidos">
-              <label class="chip"><input type="checkbox" name="preferredDays" value="Lunes" /><span>Lun</span></label>
-              <label class="chip"><input type="checkbox" name="preferredDays" value="Miércoles" /><span>Mié</span></label>
-              <label class="chip"><input type="checkbox" name="preferredDays" value="Viernes" /><span>Vie</span></label>
-              <label class="chip"><input type="checkbox" name="preferredDays" value="Sábado" /><span>Sáb</span></label>
-            </div>
-          </div>
         </div>
       </fieldset>
 
@@ -165,27 +144,13 @@
         <p class="calibration-status" data-calibration-status aria-live="polite" hidden></p>
       </fieldset>
 
-      <fieldset class="profile-fieldset">
-        <legend>Privacidad y notificaciones</legend>
-        <label class="checkbox">
-          <input type="checkbox" name="consentData" required />
-          <span>Acepto el uso de mis datos con fines clínicos y académicos.</span>
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" name="terms" required />
-          <span>Confirmo haber leído los términos del proyecto.</span>
-        </label>
-        <div class="field-grid">
-          <label class="checkbox">
-            <input type="checkbox" name="notifyPush" />
-            <span>Notificaciones push</span>
-          </label>
-          <label class="checkbox">
-            <input type="checkbox" name="notifyEmail" />
-            <span>Resumen semanal por mail</span>
-          </label>
+      <section class="profile-history" aria-labelledby="history-heading">
+        <div class="profile-history__header">
+          <h2 id="history-heading">Historial de sesiones</h2>
+          <p>Revisá cómo evolucionaste en tus últimos entrenamientos.</p>
         </div>
-      </fieldset>
+        <div class="history-list" data-history-list></div>
+      </section>
 
       <div class="profile-actions">
         <button type="button" class="btn btn-secondary" data-action="save-draft">Guardar borrador</button>
