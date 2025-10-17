@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GARPA | Registro personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-profile">
+  <header class="topbar topbar--profile">
+    <div class="brand">
+      <span class="brand-acronym">GARPA</span>
+      <span class="brand-tagline">Guante Asistente para la Rehabilitación de Personas con Artritis</span>
+    </div>
+    <div class="profile-top-actions">
+      <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+      <a class="btn btn-highlight" href="training.html">Iniciar nueva sesión</a>
+    </div>
+  </header>
+
+  <main class="profile-main">
+    <header class="profile-header">
+      <h1>Registro personal</h1>
+      <p>
+        Cargá los datos esenciales para personalizar tu plan. Podés guardar un borrador y volver más tarde cuando lo necesites.
+      </p>
+    </header>
+
+    <form class="profile-form" data-profile-form novalidate>
+      <fieldset class="profile-fieldset">
+        <legend>Datos básicos</legend>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Nombre completo</span>
+            <input class="field-input" type="text" name="fullName" autocomplete="name" required maxlength="120" />
+          </label>
+          <label class="field">
+            <span class="field-label">Edad</span>
+            <input class="field-input" type="number" name="age" min="10" max="120" required />
+          </label>
+        </div>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Mano dominante</span>
+            <select class="field-input" name="dominantHand" required>
+              <option value="" disabled selected>Seleccioná una opción</option>
+              <option value="derecha">Derecha</option>
+              <option value="izquierda">Izquierda</option>
+              <option value="ambas">Ambidiestra</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Correo electrónico</span>
+            <input class="field-input" type="email" name="email" autocomplete="email" required />
+          </label>
+        </div>
+        <label class="field">
+          <span class="field-label">Teléfono (opcional)</span>
+          <input class="field-input" type="tel" name="phone" autocomplete="tel" placeholder="Ej.: +54 9 11 5555 5555" />
+        </label>
+      </fieldset>
+
+      <fieldset class="profile-fieldset">
+        <legend>Condición clínica</legend>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Diagnóstico</span>
+            <select class="field-input" name="diagnosis" required>
+              <option value="" disabled selected>Seleccioná una opción</option>
+              <option value="oa">Osteoartritis</option>
+              <option value="ar">Artritis reumatoide</option>
+              <option value="mixta">Mixta / combinada</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Mano afectada</span>
+            <select class="field-input" name="affectedHand" required>
+              <option value="" disabled selected>Seleccioná una opción</option>
+              <option value="derecha">Derecha</option>
+              <option value="izquierda">Izquierda</option>
+              <option value="ambas">Ambas manos</option>
+            </select>
+          </label>
+        </div>
+        <label class="field">
+          <span class="field-label">Nivel de dolor actual: <span data-output="painLevel">5</span>/10</span>
+          <input class="field-input field-input--range" type="range" name="painLevel" min="0" max="10" value="5" />
+        </label>
+        <label class="field">
+          <span class="field-label">Limitación funcional</span>
+          <select class="field-input" name="functionalLimitation" required>
+            <option value="" disabled selected>Seleccioná una opción</option>
+            <option value="leve">Leve</option>
+            <option value="moderada">Media</option>
+            <option value="severa">Alta</option>
+          </select>
+        </label>
+      </fieldset>
+
+      <fieldset class="profile-fieldset">
+        <legend>Preferencias de entrenamiento</legend>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Duración objetivo (min)</span>
+            <input class="field-input" type="number" name="targetDuration" min="5" max="120" step="5" required />
+          </label>
+          <fieldset class="field fieldset">
+            <legend class="field-label">Intensidad predeterminada</legend>
+            <div class="option-group" role="radiogroup">
+              <label class="option"><input type="radio" name="defaultIntensity" value="baja" required /><span>Baja</span></label>
+              <label class="option"><input type="radio" name="defaultIntensity" value="media" /><span>Media</span></label>
+              <label class="option"><input type="radio" name="defaultIntensity" value="alta" /><span>Alta</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </fieldset>
+
+      <fieldset class="profile-fieldset">
+        <legend>Dispositivo y calibración</legend>
+        <div class="device-simple">
+          <div>
+            <p class="device-status" data-device-connection>Guante sin emparejar</p>
+            <p class="device-meta">Batería: <span data-battery-level>--%</span> · Última sinc.: <span data-last-sync>--</span></p>
+          </div>
+          <button type="button" class="btn btn-outline" data-action="pair">Emparejar</button>
+        </div>
+        <div class="field-grid">
+          <label class="field">
+            <span class="field-label">Umbral EMG (µV)</span>
+            <input class="field-input" type="number" name="emgThreshold" min="1" max="500" required />
+          </label>
+          <div class="calibration-actions">
+            <button type="button" class="btn btn-highlight" data-action="calibrate">Calibrar ahora</button>
+            <button type="button" class="btn btn-secondary" data-action="vibration-test">Prueba de vibración</button>
+          </div>
+        </div>
+        <p class="calibration-status" data-calibration-status aria-live="polite" hidden></p>
+      </fieldset>
+
+      <section class="profile-history" aria-labelledby="history-heading">
+        <div class="profile-history__header">
+          <h2 id="history-heading">Historial de sesiones</h2>
+          <p>Revisá cómo evolucionaste en tus últimos entrenamientos.</p>
+        </div>
+        <div class="history-list" data-history-list></div>
+      </section>
+
+      <div class="profile-actions">
+        <button type="button" class="btn btn-secondary" data-action="save-draft">Guardar borrador</button>
+        <button type="submit" class="btn btn-highlight">Guardar cambios</button>
+        <button type="button" class="btn btn-outline" data-action="export">Exportar datos (.csv)</button>
+        <button type="button" class="btn btn-critical" data-action="delete">Eliminar cuenta</button>
+        <p class="form-feedback" data-form-feedback aria-live="polite" hidden></p>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="footer-label">Licencias:</span>
+      <span class="footer-value" data-company="J.I.M. SRL">J.I.M. SRL</span>
+    </div>
+    <p class="footer-note">Proyecto académico de Instrumentación Biomédica 2</p>
+  </footer>
+
+  <script src="profile.js" type="module"></script>
+</body>
+</html>

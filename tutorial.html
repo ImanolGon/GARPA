@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GARPA | Tutorial esencial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-tutorial">
+  <header class="topbar">
+    <div class="brand">
+      <a class="brand-acronym" href="index.html">GARPA</a>
+      <span class="brand-tagline">Guante Asistente para la Rehabilitación de Personas con Artritis</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+      <a class="btn btn-outline" href="login.html">Iniciar sesión</a>
+    </div>
+  </header>
+
+  <main class="tutorial-main" id="tutorial">
+    <section class="tutorial-hero" aria-labelledby="tutorial-hero-title">
+      <div class="tutorial-hero__text">
+        <h1 id="tutorial-hero-title">Aprendé a usar GARPA en minutos</h1>
+        <p>Segu&iacute; el recorrido rápido para preparar el guante, conectar la app y comenzar tu primera sesión sin dudas.</p>
+        <div class="tutorial-hero__actions" role="group" aria-label="Acciones del tutorial">
+          <button class="btn btn-highlight" data-action="open-video" type="button">Ver video</button>
+          <a class="btn btn-outline" href="docs/garpa-guia.pdf" download>Descargar guía PDF</a>
+        </div>
+      </div>
+      <button class="tutorial-hero__preview" type="button" data-action="open-video" aria-label="Reproducir video tutorial">
+        <span aria-hidden="true">▶</span>
+      </button>
+    </section>
+
+    <section class="tutorial-steps" aria-labelledby="steps-heading">
+      <header class="tutorial-section-header">
+        <h2 id="steps-heading">Pasos esenciales</h2>
+        <p>Desplegá solo el contenido que necesitás para preparar tu próxima sesión.</p>
+      </header>
+      <ol class="tutorial-step-list">
+        <li class="tutorial-step" data-accordion>
+          <button class="tutorial-step__trigger" type="button" aria-expanded="false">
+            1. Preparación rápida
+          </button>
+          <div class="tutorial-step__content" hidden>
+            <ul>
+              <li>Descansá la mano, limpiá la piel y asegurate de que esté seca.</li>
+              <li>Colocá el guante ajustando las correas sin puntos de presión.</li>
+              <li>Ubicá los electrodos según la guía de tu fisioterapeuta.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tutorial-step" data-accordion>
+          <button class="tutorial-step__trigger" type="button" aria-expanded="false">
+            2. Conectar el guante por BLE
+          </button>
+          <div class="tutorial-step__content" hidden>
+            <ol>
+              <li>Encendé el guante y abrí la app GARPA en el teléfono.</li>
+              <li>Elegí <strong>GARPA-ESP32</strong> en la lista y confirmá el código.</li>
+              <li>Esperá al indicador azul fijo para empezar.</li>
+            </ol>
+          </div>
+        </li>
+        <li class="tutorial-step" data-accordion>
+          <button class="tutorial-step__trigger" type="button" aria-expanded="false">
+            3. Calibrar la señal EMG
+          </button>
+          <div class="tutorial-step__content" hidden>
+            <ul>
+              <li>Desde la app tocá <em>Calibrar EMG</em>.</li>
+              <li>Registrá reposo durante 5&nbsp;s y luego una contracción suave.</li>
+              <li>Guardá el umbral para personalizar la asistencia.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tutorial-step" data-accordion>
+          <button class="tutorial-step__trigger" type="button" aria-expanded="false">
+            4. Configurar entrenamiento
+          </button>
+          <div class="tutorial-step__content" hidden>
+            <ul>
+              <li>Elegí duración (10–15&nbsp;min como punto de partida).</li>
+              <li>Seleccioná intensidad según dolor y rigidez del día.</li>
+              <li>Activá la vibración analgésica si necesitás alivio extra.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tutorial-step" data-accordion>
+          <button class="tutorial-step__trigger" type="button" aria-expanded="false">
+            5. Registrar y revisar progreso
+          </button>
+          <div class="tutorial-step__content" hidden>
+            <ul>
+              <li>La app guarda repeticiones, intensidad EMG y notas.</li>
+              <li>Revisá el historial semanal y compartilo con tu profesional.</li>
+              <li>Usá los recordatorios para sostener la constancia.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="tutorial-safety" aria-labelledby="safety-heading">
+      <header class="tutorial-section-header">
+        <h2 id="safety-heading">Seguridad básica</h2>
+        <p>Chequeos rápidos antes, durante y después de cada uso.</p>
+      </header>
+      <div class="safety-checklist">
+        <article>
+          <h3>Antes de iniciar</h3>
+          <ul>
+            <li>Batería por encima del 30%.</li>
+            <li>Electrodos limpios y cables firmes.</li>
+            <li>Sin dolor agudo ni heridas visibles.</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Después de la sesión</h3>
+          <ul>
+            <li>Limpieza con paño húmedo y alcohol isopropílico.</li>
+            <li>Secado a la sombra antes de guardar.</li>
+            <li>Registra cómo te sentiste para ajustar la próxima sesión.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="tutorial-faq" aria-labelledby="faq-heading">
+      <header class="tutorial-section-header">
+        <h2 id="faq-heading">Resolvé dudas rápidas</h2>
+        <p>Desplegá cada pregunta para ver la respuesta.</p>
+      </header>
+      <div class="faq-list" role="list">
+        <article class="faq-item" data-faq>
+          <button class="faq-item__question" type="button" aria-expanded="false">
+            No veo la señal EMG
+          </button>
+          <div class="faq-item__answer" hidden>
+            <ul>
+              <li>Revisá la posición de los electrodos.</li>
+              <li>Confirmá que la calibración esté completada.</li>
+              <li>Chequeá la conexión BLE y repetí si es necesario.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="faq-item" data-faq>
+          <button class="faq-item__question" type="button" aria-expanded="false">
+            Se desconecta el guante
+          </button>
+          <div class="faq-item__answer" hidden>
+            <ul>
+              <li>Mantené el teléfono a menos de 5&nbsp;m.</li>
+              <li>Reiniciá el guante y volvé a emparejarlo.</li>
+              <li>Verificá que no haya otro dispositivo conectado.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="faq-item" data-faq>
+          <button class="faq-item__question" type="button" aria-expanded="false">
+            La vibración se siente débil
+          </button>
+          <div class="faq-item__answer" hidden>
+            <ul>
+              <li>Aumentá un nivel la intensidad desde la app.</li>
+              <li>Verificá el porcentaje de batería.</li>
+              <li>Ajustá el guante para mejorar el contacto con la palma.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="tutorial-support" aria-labelledby="support-heading">
+      <header class="tutorial-section-header">
+        <h2 id="support-heading">Soporte</h2>
+        <p>¿Necesitás contacto directo?</p>
+      </header>
+      <p class="support-text">
+        Escribinos a <a href="mailto:soporte@garpa.ar">soporte@garpa.ar</a> o completá el formulario de fallos.
+      </p>
+      <a class="btn btn-highlight" href="https://forms.gle/garpa-soporte" target="_blank" rel="noopener">Reportar problema</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="footer-label">Licencias:</span>
+      <span class="footer-value" data-company="J.I.M. SRL">J.I.M. SRL</span>
+    </div>
+    <p class="footer-note">Proyecto académico de Instrumentación Biomédica 2</p>
+  </footer>
+
+  <div class="modal" data-modal="video" role="dialog" aria-modal="true" aria-labelledby="modal-video-title" hidden>
+    <div class="modal__backdrop" data-action="close-modal"></div>
+    <div class="modal__dialog" role="document">
+      <header class="modal__header">
+        <h2 id="modal-video-title">Tutorial GARPA</h2>
+        <button class="modal__close" type="button" data-action="close-modal" aria-label="Cerrar video">×</button>
+      </header>
+      <div class="modal__body">
+        <div class="video-frame" data-video-container>
+          <iframe
+            title="Tutorial GARPA"
+            src="https://www.youtube-nocookie.com/embed/2PrM48n1y3k"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+      <footer class="modal__footer">
+        <button class="btn btn-secondary" type="button" data-action="close-modal">Cerrar</button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="tutorial.js" defer></script>
+</body>
+</html>
