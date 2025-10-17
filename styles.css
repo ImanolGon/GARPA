@@ -28,6 +28,14 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
+.page-login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+}
+
 .topbar {
   display: flex;
   align-items: center;
@@ -639,6 +647,210 @@ body {
 
 .is-hidden {
   display: none !important;
+}
+
+/* Auth layout */
+.auth-wrapper {
+  width: min(480px, 100%);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.auth-header {
+  text-align: center;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.auth-logo {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-primary);
+}
+
+.auth-tagline {
+  margin: 0;
+  color: var(--color-muted);
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2.3vw, 1.05rem);
+}
+
+.auth-card {
+  background: var(--color-surface);
+  border-radius: 24px;
+  padding: clamp(2rem, 5vw, 2.75rem);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.auth-card h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 600;
+  text-align: center;
+}
+
+.auth-intro {
+  margin: 0;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.98rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(27, 30, 61, 0.12);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
+}
+
+.field-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-control .field-input {
+  padding-right: 5.5rem;
+}
+
+.control-action {
+  position: absolute;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.control-action:hover,
+.control-action:focus-visible {
+  background-color: rgba(43, 112, 216, 0.12);
+  outline: none;
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.remember input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--color-primary);
+}
+
+.auth-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover,
+.auth-link:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+.auth-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.auth-legal {
+  margin: 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.auth-message {
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.auth-message.is-error {
+  background: rgba(217, 83, 79, 0.12);
+  color: #942323;
+  border-color: rgba(217, 83, 79, 0.35);
+}
+
+.auth-message.is-success {
+  background: rgba(34, 181, 115, 0.12);
+  color: #12784f;
+  border-color: rgba(34, 181, 115, 0.35);
+}
+
+.auth-message.is-info {
+  background: rgba(43, 112, 216, 0.12);
+  color: var(--color-secondary);
+  border-color: rgba(43, 112, 216, 0.25);
+}
+
+.page-login .btn-highlight:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .auth-card {
+    padding: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .auth-wrapper {
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 640px) {
