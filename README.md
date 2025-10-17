@@ -22,3 +22,12 @@ La aplicación es completamente estática, por lo que podés visualizarla direct
 3. Abrí <http://localhost:8000/index.html> en tu navegador.
 
 Levantar el servidor evita problemas de rutas relativas y te permite probar la experiencia completa como si estuviera desplegada en la web.
+
+## Páginas disponibles
+
+- `index.html`: portada con acceso rápido al tutorial, entrenamiento y registro personal.
+- `tutorial.html`: guía interactiva con video, paso a paso, seguridad, accesibilidad y enlaces de soporte.
+- `login.html`: formulario de inicio de sesión con recuperación y acceso a registro.
+- `training.html`: configuración de sesiones (duración e intensidad).
+- `entrenamiento-activo.html`: visualización en vivo con temporizador, control de intensidad y señal EMG simulada.
+- `registro.html`: registro personal del paciente con preferencias, dispositivo y calibración.
