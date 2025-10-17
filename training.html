@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configurar entrenamiento | GARPA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-training">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-acronym">GARPA</span>
+      <span class="brand-tagline">Guante Asistente para la Rehabilitación de Personas con Artritis</span>
+    </div>
+    <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+  </header>
+
+  <main class="training-main">
+    <section class="training-card" aria-labelledby="training-title">
+      <header class="training-card__header">
+        <h1 id="training-title">Configurar entrenamiento</h1>
+        <p class="training-card__description">
+          Ajusta la duración y la intensidad para que el guante adapte la asistencia a tus necesidades del día.
+        </p>
+      </header>
+
+      <form class="training-form" action="entrenamiento-activo.html" method="get">
+        <div class="field-group">
+          <label class="field-label" for="duration">Tiempo de entrenamiento</label>
+          <div class="time-input">
+            <input type="number" id="duration" name="duration" min="5" max="120" step="5" value="20" required />
+            <span class="time-unit" aria-hidden="true">min</span>
+          </div>
+          <p class="field-hint">Selecciona la duración estimada del ejercicio para organizar tu sesión.</p>
+        </div>
+
+        <fieldset class="field-group">
+          <legend class="field-label" id="intensity-label">Nivel de intensidad</legend>
+          <div class="intensity-selector" role="radiogroup" aria-labelledby="intensity-label">
+            <span class="intensity-highlight" aria-hidden="true"></span>
+            <label class="intensity-option">
+              <input type="radio" name="intensity" value="baja" checked />
+              <span>Baja</span>
+            </label>
+            <label class="intensity-option">
+              <input type="radio" name="intensity" value="media" />
+              <span>Media</span>
+            </label>
+            <label class="intensity-option">
+              <input type="radio" name="intensity" value="alta" />
+              <span>Alta</span>
+            </label>
+          </div>
+          <p class="field-hint">Define la intensidad para graduar la fuerza del servo y la asistencia vibratoria.</p>
+        </fieldset>
+
+        <button type="submit" class="btn btn-highlight btn-accept">Aceptar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="footer-label">Licencias:</span>
+      <span class="footer-value" data-company="J.I.M. SRL">J.I.M. SRL</span>
+    </div>
+    <p class="footer-note">Proyecto académico de Instrumentación Biomédica 2</p>
+  </footer>
+
+  <script src="training.js"></script>
+</body>
+</html>
