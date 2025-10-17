@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GARPA | Registro personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-profile">
+  <header class="topbar topbar--profile">
+    <div class="brand">
+      <span class="brand-acronym">GARPA</span>
+      <span class="brand-tagline">Guante Asistente para la Rehabilitación de Personas con Artritis</span>
+    </div>
+    <div class="profile-top-actions">
+      <a class="btn btn-secondary" href="index.html">Volver al inicio</a>
+      <a class="btn btn-highlight" href="training.html">Iniciar nueva sesión</a>
+    </div>
+  </header>
+
+  <main class="profile-layout">
+    <aside class="profile-summary">
+      <h1>Registro personal</h1>
+      <p>
+        Completa tu perfil en unos minutos para personalizar tus sesiones y sincronizar el guante
+        GARPA. Puedes guardar cada sección a medida que avances y retomar cuando quieras.
+      </p>
+
+      <div class="summary-card" role="status" aria-live="polite" data-profile-progress>
+        <h2>Estado del perfil</h2>
+        <dl>
+          <div>
+            <dt>Secciones completas</dt>
+            <dd data-progress-count>0 de 7</dd>
+          </div>
+          <div>
+            <dt>Última actualización</dt>
+            <dd data-progress-updated>No registrado</dd>
+          </div>
+          <div>
+            <dt>Sincronización del guante</dt>
+            <dd>
+              <span data-device-status>Sin emparejar</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <section class="summary-card summary-card--tips">
+        <h2>Consejos rápidos</h2>
+        <ul>
+          <li>Guarda cada bloque cuando termines para registrar tu avance.</li>
+          <li>La calibración EMG es clave antes de iniciar un nuevo plan.</li>
+          <li>Si cambias de dispositivo, vuelve a emparejarlo desde esta pantalla.</li>
+        </ul>
+      </section>
+    </aside>
+
+    <form class="profile-form" data-profile-form novalidate>
+      <section class="profile-section" data-section="basic">
+        <header>
+          <h2>Datos básicos</h2>
+          <p>Cuéntanos quién eres para personalizar tu seguimiento.</p>
+        </header>
+        <div class="section-body">
+          <div class="field">
+            <label class="field-label" for="fullName">Nombre completo</label>
+            <input
+              class="field-input"
+              type="text"
+              id="fullName"
+              name="fullName"
+              autocomplete="name"
+              required
+              maxlength="120"
+              placeholder="Nombre y apellido"
+            />
+            <p class="field-feedback" data-error-for="fullName" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="age">Edad</label>
+              <input
+                class="field-input"
+                type="number"
+                id="age"
+                name="age"
+                min="10"
+                max="120"
+                required
+                placeholder="Ej.: 54"
+              />
+              <p class="field-feedback" data-error-for="age" aria-live="polite" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="dominantHand">Mano dominante</label>
+              <select class="field-input" id="dominantHand" name="dominantHand" required>
+                <option value="" disabled>Selecciona una opción</option>
+                <option value="derecha">Derecha</option>
+                <option value="izquierda">Izquierda</option>
+                <option value="ambas">Ambidiestra</option>
+              </select>
+              <p class="field-feedback" data-error-for="dominantHand" aria-live="polite" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="email">Correo electrónico</label>
+            <input
+              class="field-input"
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+              placeholder="persona@ejemplo.com"
+            />
+            <p class="field-feedback" data-error-for="email" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="phone">Teléfono (opcional)</label>
+            <input
+              class="field-input"
+              type="tel"
+              id="phone"
+              name="phone"
+              autocomplete="tel"
+              placeholder="Ej.: +54 9 11 5555 5555"
+            />
+          </div>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="condition">
+        <header>
+          <h2>Condición clínica</h2>
+          <p>Describe el estado actual de tus manos para ajustar la asistencia.</p>
+        </header>
+        <div class="section-body">
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="diagnosis">Diagnóstico principal</label>
+              <select class="field-input" id="diagnosis" name="diagnosis" required>
+                <option value="" disabled>Selecciona una opción</option>
+                <option value="oa">Osteoartritis</option>
+                <option value="ar">Artritis reumatoide</option>
+                <option value="mixta">Mixta / combinada</option>
+                <option value="otro">Otro</option>
+              </select>
+              <p class="field-feedback" data-error-for="diagnosis" aria-live="polite" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="affectedHand">Mano afectada</label>
+              <select class="field-input" id="affectedHand" name="affectedHand" required>
+                <option value="" disabled>Selecciona una opción</option>
+                <option value="derecha">Derecha</option>
+                <option value="izquierda">Izquierda</option>
+                <option value="ambas">Ambas manos</option>
+              </select>
+              <p class="field-feedback" data-error-for="affectedHand" aria-live="polite" hidden></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="painLevel">
+              Nivel de dolor actual: <span data-output="painLevel">5</span>/10
+            </label>
+            <input
+              class="field-input field-input--range"
+              type="range"
+              id="painLevel"
+              name="painLevel"
+              min="0"
+              max="10"
+              step="1"
+              value="5"
+            />
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="morningStiffness">Rigidez matutina (minutos)</label>
+              <input
+                class="field-input"
+                type="number"
+                id="morningStiffness"
+                name="morningStiffness"
+                min="0"
+                max="240"
+                step="5"
+                required
+                placeholder="Ej.: 30"
+              />
+              <p class="field-feedback" data-error-for="morningStiffness" aria-live="polite" hidden></p>
+            </div>
+
+            <div class="field">
+              <label class="field-label" for="functionalLimitation">Limitación funcional</label>
+              <select class="field-input" id="functionalLimitation" name="functionalLimitation" required>
+                <option value="" disabled>Selecciona una opción</option>
+                <option value="leve">Leve</option>
+                <option value="moderada">Media</option>
+                <option value="severa">Alta</option>
+              </select>
+              <p class="field-feedback" data-error-for="functionalLimitation" aria-live="polite" hidden></p>
+            </div>
+          </div>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="preferences">
+        <header>
+          <h2>Preferencias de entrenamiento</h2>
+          <p>Configura objetivos y horarios que se adapten a tu rutina.</p>
+        </header>
+        <div class="section-body">
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="targetDuration">Duración objetivo por sesión (min)</label>
+              <input
+                class="field-input"
+                type="number"
+                id="targetDuration"
+                name="targetDuration"
+                min="5"
+                max="120"
+                step="5"
+                required
+                placeholder="Ej.: 20"
+              />
+              <p class="field-feedback" data-error-for="targetDuration" aria-live="polite" hidden></p>
+            </div>
+
+            <fieldset class="field fieldset">
+              <legend class="field-label">Intensidad predeterminada</legend>
+              <div class="option-group" role="radiogroup" aria-label="Intensidad predeterminada">
+                <label class="option">
+                  <input
+                    type="radio"
+                    name="defaultIntensity"
+                    value="baja"
+                    data-feedback-target="defaultIntensity"
+                    required
+                  />
+                  <span>Baja</span>
+                </label>
+                <label class="option">
+                  <input
+                    type="radio"
+                    name="defaultIntensity"
+                    value="media"
+                    data-feedback-target="defaultIntensity"
+                  />
+                  <span>Media</span>
+                </label>
+                <label class="option">
+                  <input
+                    type="radio"
+                    name="defaultIntensity"
+                    value="alta"
+                    data-feedback-target="defaultIntensity"
+                  />
+                  <span>Alta</span>
+                </label>
+              </div>
+              <p class="field-feedback" data-error-for="defaultIntensity" aria-live="polite" hidden></p>
+            </fieldset>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label class="field-label" for="preferredTime">Horario preferido</label>
+              <input class="field-input" type="time" id="preferredTime" name="preferredTime" />
+            </div>
+
+            <div class="field">
+              <span class="field-label">Días preferidos</span>
+              <div class="chip-group" role="group" aria-label="Selecciona días preferidos">
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Lunes" />
+                  <span>Lun</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Martes" />
+                  <span>Mar</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Miércoles" />
+                  <span>Mié</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Jueves" />
+                  <span>Jue</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Viernes" />
+                  <span>Vie</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Sábado" />
+                  <span>Sáb</span>
+                </label>
+                <label class="chip">
+                  <input type="checkbox" name="preferredDays" value="Domingo" />
+                  <span>Dom</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="device">
+        <header>
+          <h2>Dispositivo GARPA</h2>
+          <p>Empareja tu guante y revisa su estado en tiempo real.</p>
+        </header>
+        <div class="section-body">
+          <div class="device-card">
+            <div>
+              <h3>Estado del guante</h3>
+              <p class="device-status" data-device-connection>Sin emparejar</p>
+            </div>
+            <button type="button" class="btn btn-outline" data-action="pair">Emparejar por BLE</button>
+          </div>
+
+          <div class="device-metrics">
+            <div>
+              <span class="metric-label">Batería</span>
+              <span class="metric-value" data-battery-level>--%</span>
+            </div>
+            <div>
+              <span class="metric-label">Última sincronización</span>
+              <span class="metric-value" data-last-sync>Sin datos</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="deviceAlias">Nombre del dispositivo</label>
+            <input
+              class="field-input"
+              type="text"
+              id="deviceAlias"
+              name="deviceAlias"
+              maxlength="60"
+              placeholder="Ej.: Guante principal"
+            />
+          </div>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="calibration">
+        <header>
+          <h2>Calibración y pruebas</h2>
+          <p>Ajusta la sensibilidad EMG y comprueba la vibración antes de entrenar.</p>
+        </header>
+        <div class="section-body">
+          <div class="field">
+            <label class="field-label" for="emgThreshold">Umbral EMG inicial (µV)</label>
+            <input
+              class="field-input"
+              type="number"
+              id="emgThreshold"
+              name="emgThreshold"
+              min="1"
+              max="500"
+              step="1"
+              required
+              placeholder="Ej.: 120"
+            />
+            <p class="field-feedback" data-error-for="emgThreshold" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="calibration-actions">
+            <button type="button" class="btn btn-highlight" data-action="calibrate">Calibrar ahora</button>
+            <button type="button" class="btn btn-outline" data-action="vibration-test">Prueba de vibración</button>
+          </div>
+          <p class="calibration-status" data-calibration-status aria-live="polite" hidden></p>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="privacy">
+        <header>
+          <h2>Privacidad y consentimiento</h2>
+          <p>Necesitamos tu autorización para almacenar y analizar los datos recolectados.</p>
+        </header>
+        <div class="section-body">
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              name="consentData"
+              data-single="true"
+              data-feedback-target="consentGroup"
+              required
+            />
+            <span>Acepto el uso de mis datos para fines clínicos y de investigación.</span>
+          </label>
+          <label class="checkbox">
+            <input
+              type="checkbox"
+              name="terms"
+              data-single="true"
+              data-feedback-target="consentGroup"
+              required
+            />
+            <span>Confirmo haber leído y aceptado los términos y condiciones del proyecto.</span>
+          </label>
+          <p class="field-feedback" data-error-for="consentGroup" aria-live="polite" hidden></p>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section" data-section="notifications">
+        <header>
+          <h2>Notificaciones</h2>
+          <p>Recibe recordatorios y novedades para mantener la constancia.</p>
+        </header>
+        <div class="section-body">
+          <label class="checkbox">
+            <input type="checkbox" name="notifyPush" data-single="true" />
+            <span>Notificaciones push en la aplicación</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="notifyEmail" data-single="true" />
+            <span>Resumen semanal por correo electrónico</span>
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" name="notifyReminders" data-single="true" />
+            <span>Recordatorios automáticos antes de cada sesión</span>
+          </label>
+        </div>
+        <footer class="section-footer">
+          <button type="button" class="btn btn-secondary btn-compact" data-save-section>
+            Guardar sección
+          </button>
+          <span class="section-status" data-section-status aria-live="polite" hidden></span>
+        </footer>
+      </section>
+
+      <section class="profile-section profile-section--actions" data-section="actions">
+        <header>
+          <h2>Acciones finales</h2>
+          <p>Guarda la información completa o gestiona tu cuenta.</p>
+        </header>
+        <div class="section-body">
+          <button type="submit" class="btn btn-highlight" data-action="save-all">Guardar cambios</button>
+          <button type="button" class="btn btn-outline" data-action="export">Exportar datos (.csv)</button>
+          <button type="button" class="btn btn-critical" data-action="delete">Eliminar cuenta</button>
+          <p class="section-status" data-final-status aria-live="polite" hidden></p>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <span class="footer-label">Licencias:</span>
+      <span class="footer-value" data-company="J.I.M. SRL">J.I.M. SRL</span>
+    </div>
+    <p class="footer-note">Proyecto académico de Instrumentación Biomédica 2</p>
+  </footer>
+
+  <script src="profile.js" type="module"></script>
+</body>
+</html>
