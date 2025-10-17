@@ -1,54 +1,29 @@
 (function () {
-  const root = document.documentElement;
-  if (!root) return;
-
   const qs = (selector, scope = document) => scope.querySelector(selector);
   const qsa = (selector, scope = document) => Array.from(scope.querySelectorAll(selector));
 
-  /* Stepper logic */
-  const stepperTabs = qsa('.stepper__tab');
-  const stepperPanels = qsa('.stepper__panel');
-  let currentTab = stepperTabs.find((tab) => tab.classList.contains('is-active')) || stepperTabs[0];
+  /* Accordion for steps */
+  const accordionItems = qsa('[data-accordion]');
+  accordionItems.forEach((item) => {
+    const trigger = qs('.tutorial-step__trigger', item);
+    const content = qs('.tutorial-step__content', item);
+    if (!trigger || !content) return;
 
-  const setActiveStep = (nextTab) => {
-    if (!nextTab || nextTab === currentTab) return;
+    trigger.addEventListener('click', () => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      accordionItems.forEach((other) => {
+        if (other === item) return;
+        const otherTrigger = qs('.tutorial-step__trigger', other);
+        const otherContent = qs('.tutorial-step__content', other);
+        if (!otherTrigger || !otherContent) return;
+        otherTrigger.setAttribute('aria-expanded', 'false');
+        otherContent.hidden = true;
+        other.classList.remove('is-open');
+      });
 
-    stepperTabs.forEach((tab) => {
-      const isActive = tab === nextTab;
-      tab.classList.toggle('is-active', isActive);
-      tab.setAttribute('aria-selected', String(isActive));
-      tab.tabIndex = isActive ? 0 : -1;
-    });
-
-    stepperPanels.forEach((panel) => {
-      const match = panel.id === nextTab.getAttribute('aria-controls');
-      panel.classList.toggle('is-active', match);
-      panel.hidden = !match;
-    });
-
-    currentTab = nextTab;
-    currentTab.focus();
-  };
-
-  stepperTabs.forEach((tab) => {
-    tab.addEventListener('click', () => setActiveStep(tab));
-    tab.addEventListener('keydown', (event) => {
-      const { key } = event;
-      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(key)) {
-        return;
-      }
-
-      event.preventDefault();
-      const index = stepperTabs.indexOf(tab);
-      if (key === 'Home') {
-        setActiveStep(stepperTabs[0]);
-      } else if (key === 'End') {
-        setActiveStep(stepperTabs[stepperTabs.length - 1]);
-      } else {
-        const direction = key === 'ArrowLeft' || key === 'ArrowUp' ? -1 : 1;
-        const nextIndex = (index + direction + stepperTabs.length) % stepperTabs.length;
-        setActiveStep(stepperTabs[nextIndex]);
-      }
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+      content.hidden = isOpen;
+      item.classList.toggle('is-open', !isOpen);
     });
   });
 
@@ -70,7 +45,7 @@
   /* Modal logic */
   const modal = qs('[data-modal="video"]');
   const openButtons = qsa('[data-action="open-video"]');
-  const closeButtons = qsa('[data-action="close-modal"]', modal || document);
+  const closeButtons = modal ? qsa('[data-action="close-modal"]', modal) : [];
   const videoFrame = modal ? qs('iframe', modal) : null;
   const videoSrc = videoFrame ? videoFrame.getAttribute('src') : null;
   if (videoFrame && videoSrc) {
@@ -91,9 +66,7 @@
       modal.classList.add('is-visible');
       if (videoFrame) {
         const src = videoFrame.dataset.src || videoSrc;
-        if (src) {
-          videoFrame.setAttribute('src', src);
-        }
+        if (src) videoFrame.setAttribute('src', src);
       }
       const focusable = modal.querySelector('button, [href], [tabindex="0"]');
       if (focusable) focusable.focus();
