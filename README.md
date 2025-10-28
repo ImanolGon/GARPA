@@ -31,3 +31,25 @@ Levantar el servidor evita problemas de rutas relativas y te permite probar la e
 - `training.html`: configuración de sesiones (duración e intensidad).
 - `entrenamiento-activo.html`: visualización en vivo con temporizador, control de intensidad y señal EMG simulada.
 - `registro.html`: registro personal del paciente con preferencias, dispositivo y calibración.
+
+## Aplicación Android
+
+El repositorio incluye una primera versión de la app móvil nativa (Kotlin + Jetpack Compose) en `android-app/`.
+
+### Requisitos
+
+- Android Studio Giraffe o superior.
+- Android SDK 34 configurado en el entorno.
+
+### Ejecución
+
+1. Abrir Android Studio y seleccionar **Open** para importar la carpeta `android-app/`.
+2. Conectar un dispositivo o crear un emulador con Android 8.0 (API 26) o superior.
+3. Compilar y ejecutar el módulo `app`.
+
+### Funcionalidades iniciales
+
+- Conexión WiFi al ESP32 indicando IP y puerto del socket TCP desde el cual se envían las muestras EMG.
+- Conexión Bluetooth clásica (SPP) con dispositivos emparejados previamente.
+- Visualización en tiempo real de la señal EMG recibida.
+- Control básico para iniciar y detener sesiones de entrenamiento.
